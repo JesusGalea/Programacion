@@ -20,7 +20,7 @@ public class Array4 {
 			
 		} while (contador < 20);
 		System.out.println("los pares son: ");
-		for ( int e = 0; e < pares.length; e++) {
+		for (int e = 0; e < pares.length; e++) {
 			System.out.print(pares[e]+ "\t");
 		}
 	}
