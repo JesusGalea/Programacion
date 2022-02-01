@@ -35,6 +35,21 @@ public int getGrado(){
 public char getGrupo(){
 	return Grupo;
 }
+
+public void setNombre(String a) {
+	Nombre = a;
+}
+
+public void setClase(String b) {
+	Clase = b;
+}
+public void setGrado(int c) {
+	Grado = c;
+}
+public void setGrupo(char d) {
+	Grupo = d;
+}
+
 public void estudiar() {
 	System.out.println("estoy estudiando");
 }
