@@ -54,6 +54,6 @@ public void estudiar() {
 	System.out.println("estoy estudiando");
 }
 public void irClase() {
-	System.out.println("estoy yendo a clase");
+	System.out.println("yendo a clase");
 }
 }
