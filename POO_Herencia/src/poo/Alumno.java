@@ -51,9 +51,9 @@ public void setGrupo(char d) {
 }
 
 public void estudiar() {
-	System.out.println("estoy estudiando");
+	System.out.println(this.Nombre + " está estudiando");
 }
 public void irClase() {
-	System.out.println("yendo a clase");
+	System.out.println(this.Nombre + " está yendo a clase");
 }
 }
