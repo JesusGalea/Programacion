@@ -1,15 +1,14 @@
 package grafico;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 
-public class Baja extends JFrame {
+public class Baja extends Grafico {
 
-	private JPanel contentPane;
+	private JFrame frameito;
 
 	/**
 	 * Launch the application.
@@ -18,8 +17,8 @@ public class Baja extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Baja frame = new Baja();
-					frame.setVisible(true);
+					Baja window = new Baja();
+					window.frameito.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -28,15 +27,25 @@ public class Baja extends JFrame {
 	}
 
 	/**
-	 * Create the frame.
+	 * Create the application.
 	 */
 	public Baja() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
+		initialize();
+	}
+
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	private void initialize() {
+		frameito = new JFrame();
+		frameito.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+              XD().setVisible(true);
+            }
+        });
+		frameito.setBounds(100, 100, 450, 300);
+		frameito.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 	}
 
 }
