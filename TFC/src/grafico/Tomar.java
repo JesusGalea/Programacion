@@ -17,6 +17,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 import javax.swing.JComboBox;
 import javax.swing.JList;
 import javax.swing.DefaultComboBoxModel;
@@ -24,14 +25,15 @@ import javax.swing.DefaultComboBoxModel;
 public class Tomar extends Grafico {
 
 	private JFrame frameito;
-	private JTextField textField;
-	private JComboBox comboBox;
-   static ArrayList<String> libros = new ArrayList<String>();
+	private JComboBox CBBook;
+    static ArrayList<String> libros = new ArrayList<String>();
+    static ArrayList<String> clientes = new ArrayList<String>();
 
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
+		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -56,24 +58,9 @@ public class Tomar extends Grafico {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		try {
-           
-            Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost/biblioteca", "root", "");
-             
-            Statement statement = conexion.createStatement();
-            ResultSet resultSet = statement.executeQuery("select * from libros");
-             
-             
-            while (resultSet.next()) {
-                libros.add(resultSet.getString("Titulo"));
-            }
-             
-            resultSet.close();
-            statement.close();
-        } catch (SQLException ex) {
-           
-        }
-             
+		
+		librear();
+		clientear();
     
 		frameito = new JFrame();
 		frameito.addWindowListener(new WindowAdapter() {
@@ -86,29 +73,123 @@ public class Tomar extends Grafico {
 		frameito.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frameito.getContentPane().setLayout(null);
 		
+		
+
+		CBBook = new JComboBox();
+		CBBook.setModel(new DefaultComboBoxModel(libros.toArray(new String[0])));
+		CBBook.setBounds(10, 70, 226, 22);
+		frameito.getContentPane().add(CBBook);
+		
+		JComboBox CBname = new JComboBox();
+		CBname.setModel(new DefaultComboBoxModel(clientes.toArray(new String[0])));
+		CBname.setBounds(10, 26, 226, 22);
+		frameito.getContentPane().add(CBname);
+		
 		JButton btnNewButton = new JButton("New button");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Logica obj1 = new Logica();
-				try {
-					obj1.insertar(1, 2, 3);
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+				
+				
+				Connection conexion;
+			
+					try {
+						conexion = DriverManager.getConnection("jdbc:mysql://localhost/biblioteca", "root", "");
+						Statement st1 = conexion.createStatement();
+						Statement st2 = conexion.createStatement();
+						Statement st3 = conexion.createStatement();
+						
+						ResultSet idRS = st1.executeQuery("SELECT * FROM `clientes` WHERE `Nombre` LIKE '" +CBname.getSelectedItem()+"'");
+						ResultSet idRS2 = st2.executeQuery("SELECT * FROM `libros` WHERE `Titulo` LIKE '" +CBBook.getSelectedItem()+"'");
+						ResultSet id = st3.executeQuery("SELECT * FROM `prestamo` ORDER BY ID DESC LIMIT 1");
+						idRS2.next();
+						idRS.next();
+						id.next();
+						
+						
+						int numero = id.getInt("ID") + 1;
+						int id_libro = idRS2.getInt("ID");
+						int id_cliente = idRS.getInt("ID");
+						
+						
+						
+						obj1.insertar(numero ,id_libro, id_cliente);
+						obj1.update(1, idRS2.getString("Titulo"));
+						
+						
+					} catch (SQLException e1) {
+						
+						e1.printStackTrace();
+					}
+					libros.clear();
+					SwingUtilities.updateComponentTreeUI(frameito);
+					
+					
+				    
+					
+					
+					
+					
+					
+			
+				
+				
+		        
 			}
 		});
 		btnNewButton.setBounds(147, 227, 89, 23);
 		frameito.getContentPane().add(btnNewButton);
 		
-		textField = new JTextField();
-		textField.setBounds(10, 25, 86, 20);
-		frameito.getContentPane().add(textField);
-		textField.setColumns(10);
+		
+	}
 
-		comboBox = new JComboBox();
-		comboBox.setModel(new DefaultComboBoxModel<String>(libros.toArray(new String[0])));
-		comboBox.setBounds(10, 70, 226, 22);
-		frameito.getContentPane().add(comboBox);
+	private void librear() {
+		try {
+	           
+            Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost/biblioteca", "root", "");
+             
+            Statement statement = conexion.createStatement();
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM `libros` WHERE `Prestado` = 0");
+           
+             
+            while (resultSet.next()) {
+            	if(!libros.contains(resultSet.getString("Titulo"))){
+                libros.add(resultSet.getString("Titulo"));
+            }
+            	
+            }
+            
+            
+             
+            resultSet.close();
+            statement.close();
+        } catch (SQLException ex) {
+           
+        }
+	}
+	
+	private void clientear() {
+		try {
+	           
+            Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost/biblioteca", "root", "");
+             
+            Statement statement = conexion.createStatement();
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM `clientes`");
+           
+             
+            while (resultSet.next()) {
+            	if(!clientes.contains(resultSet.getString("Nombre"))){
+                clientes.add(resultSet.getString("Nombre"));
+            }
+            	
+            }
+            
+            
+             
+            resultSet.close();
+            statement.close();
+        } catch (SQLException ex) {
+           
+        }
 	}
 }

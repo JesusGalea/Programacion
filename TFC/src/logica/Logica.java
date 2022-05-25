@@ -7,7 +7,7 @@ import java.sql.Statement;
 
 public class Logica {
 
-	public static void insertar(int a, int b, int c ) throws SQLException {
+	public void insertar(int a, int b, int c ) throws SQLException {
 		
 		final String URL ="jdbc:mysql://localhost/biblioteca";
 		final String USER = "root";
@@ -21,7 +21,7 @@ public class Logica {
 					Statement statement = connection.createStatement();
 			
 
-				String query = "INSERT INTO `prestamo` (`ID`, `ID_Libro`, `ID_Cliente`, `fecha`) VALUES ('"+a+"', '"+b+"', '"+c+"',  NOW())";
+				String query = "INSERT INTO `prestamo` VALUES ('"+a+"','"+b+"', '"+c+"', NOW())";
 				statement.executeUpdate(query);
 			
 			
@@ -29,4 +29,24 @@ public class Logica {
 
 		
 }
+	
+
+	public void update(int a, String b) throws SQLException {
+		final String URL ="jdbc:mysql://localhost/biblioteca";
+		final String USER = "root";
+		final String PASS = "";
+
+
+		
+		
+			Connection connection = DriverManager.getConnection(URL, USER, PASS);
+					Statement statement = connection.createStatement();
+			
+
+				String query = "update libros set Prestado = "+a+" where Titulo = '"+ b + "' ";
+				statement.executeUpdate(query);
+			
+	}
+
+	
 }
