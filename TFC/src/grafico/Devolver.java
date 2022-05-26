@@ -22,7 +22,9 @@ import java.awt.event.ActionEvent;
 
 public class Devolver extends Grafico{
 	static ArrayList<String> clientes = new ArrayList<String>();
-	private JFrame frameito;
+	static ArrayList<String> libros = new ArrayList<String>();
+	static JFrame frameito;
+	static Devolver uwu;
 	
 
 	public Devolver(Grafico frame) {
@@ -49,32 +51,31 @@ public class Devolver extends Grafico{
 		frameito.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frameito.getContentPane().setLayout(null);
 		
+		
+		JComboBox CBname = new JComboBox();
+		CBname.setModel(new DefaultComboBoxModel(clientes.toArray(new String[0])));
+		CBname.setBounds(186, 21, 226, 22);
+		frameito.getContentPane().add(CBname);
+		
+		JLabel LB1 = new JLabel("Usuario");
+		LB1.setBounds(85, 25, 46, 14);
+		frameito.getContentPane().add(LB1);
+		
+		
 		JButton B1 = new JButton("Confirmar usuario");
 		B1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
+		Devolver2 obj2 = new Devolver2();
+		obj2.main(null);
+		obj2.setName(CBname.getSelectedItem().toString());
 		
-				Devolver2 obj1 = new Devolver2();
-				obj1.main(null);
+			
 			
 			}
 		});
-		B1.setBounds(33, 184, 117, 23);
+		B1.setBounds(133, 85, 117, 23);
 		frameito.getContentPane().add(B1);
-		
-		JButton btnNewButton = new JButton("Devolver libro");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		btnNewButton.setBounds(245, 184, 117, 23);
-		frameito.getContentPane().add(btnNewButton);
-		
-		
-		JComboBox CBname = new JComboBox();
-		CBname.setModel(new DefaultComboBoxModel(clientes.toArray(new String[0])));
-		CBname.setBounds(10, 26, 226, 22);
-		frameito.getContentPane().add(CBname);
 		
 	}
 	
@@ -102,4 +103,6 @@ public class Devolver extends Grafico{
            
         }
 	}
+	
+	
 }
