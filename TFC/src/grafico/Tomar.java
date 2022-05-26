@@ -34,24 +34,15 @@ public class Tomar extends Grafico {
 	 */
 	public static void main(String[] args) {
 		
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Tomar window = new Tomar();
-					window.frameito.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+	
 	}
 
 	/**
 	 * Create the application.
 	 */
-	public Tomar() {
+	public Tomar(Grafico frame) {
 		initialize();
-		
+		frameito.setVisible(true);
 	}
 
 	/**
@@ -85,7 +76,7 @@ public class Tomar extends Grafico {
 		CBname.setBounds(10, 26, 226, 22);
 		frameito.getContentPane().add(CBname);
 		
-		JButton btnNewButton = new JButton("New button");
+		JButton btnNewButton = new JButton("Tomar prestado");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Logica obj1 = new Logica();
@@ -122,7 +113,7 @@ public class Tomar extends Grafico {
 						e1.printStackTrace();
 					}
 					libros.clear();
-					SwingUtilities.updateComponentTreeUI(frameito);
+					
 					
 					
 				    

@@ -17,7 +17,7 @@ import javax.swing.JTextField;
 public class Grafico {
 	
 	private JFrame frame;
-	private Grafico j1 = this;
+	static Grafico j1;
 	private JTextField textField;
 	
 
@@ -57,8 +57,8 @@ public class Grafico {
 		JButton B2 = new JButton("Tomar prestado");
 		B2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				grafico.Tomar obj1 = new grafico.Tomar();
-				obj1.main(null);
+				Tomar obj1 = new Tomar(j1);
+				frame.setVisible(false);
 			}
 		});
 		B2.setBounds(519, 225, 144, 61);
