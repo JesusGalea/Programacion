@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 25-05-2022 a las 23:45:34
+-- Tiempo de generación: 27-05-2022 a las 22:41:09
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 7.1.32
 
@@ -37,7 +37,8 @@ CREATE TABLE `clientes` (
 --
 
 INSERT INTO `clientes` (`ID`, `Nombre`) VALUES
-(1, 'Luis');
+(1, 'Luis'),
+(2, 'Sara');
 
 -- --------------------------------------------------------
 
@@ -46,7 +47,7 @@ INSERT INTO `clientes` (`ID`, `Nombre`) VALUES
 --
 
 CREATE TABLE `libros` (
-  `ID` int(2) NOT NULL,
+  `IDl` int(2) NOT NULL,
   `Titulo` varchar(60) NOT NULL,
   `Autor` varchar(50) NOT NULL,
   `Prestado` tinyint(1) NOT NULL
@@ -56,9 +57,11 @@ CREATE TABLE `libros` (
 -- Volcado de datos para la tabla `libros`
 --
 
-INSERT INTO `libros` (`ID`, `Titulo`, `Autor`, `Prestado`) VALUES
-(1, 'El Quijote', 'Cervantes', 1),
-(2, 'Cronicas de Vikeni', 'Lorena Grande', 1);
+INSERT INTO `libros` (`IDl`, `Titulo`, `Autor`, `Prestado`) VALUES
+(1, 'El Quijote', 'Cervantes', 0),
+(2, 'Cronicas de Vikeni', 'Lorena Grande', 0),
+(3, 'La Biblia', 'Jesucristo', 0),
+(4, 'Luz y Color', 'James Gurney S', 0);
 
 -- --------------------------------------------------------
 
@@ -78,13 +81,7 @@ CREATE TABLE `prestamo` (
 --
 
 INSERT INTO `prestamo` (`ID`, `ID_Libro`, `ID_Cliente`, `fecha`) VALUES
-(1, 2, 3, '2022-05-24'),
-(2, 1, 1, '2022-05-25'),
-(3, 1, 1, '2022-05-25'),
-(4, 2, 1, '2022-05-25'),
-(5, 1, 1, '2022-05-25'),
-(6, 1, 1, '2022-05-25'),
-(7, 2, 1, '2022-05-25');
+(20, 0, 0, '0000-00-00');
 
 --
 -- Índices para tablas volcadas
@@ -100,7 +97,7 @@ ALTER TABLE `clientes`
 -- Indices de la tabla `libros`
 --
 ALTER TABLE `libros`
-  ADD PRIMARY KEY (`ID`);
+  ADD PRIMARY KEY (`IDl`);
 
 --
 -- Indices de la tabla `prestamo`
@@ -116,13 +113,13 @@ ALTER TABLE `prestamo`
 -- AUTO_INCREMENT de la tabla `clientes`
 --
 ALTER TABLE `clientes`
-  MODIFY `ID` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `ID` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `prestamo`
 --
 ALTER TABLE `prestamo`
-  MODIFY `ID` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `ID` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
