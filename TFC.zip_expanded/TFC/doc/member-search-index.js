@@ -1,0 +1,1 @@
+memberSearchIndex = [{"p":"logica","c":"Logica","l":"delete(int)"},{"p":"logica","c":"Logica","l":"insertar(int, int, int)","u":"insertar(int,int,int)"},{"p":"logica","c":"Logica","l":"Logica()","u":"%3Cinit%3E()"},{"p":"logica","c":"Logica","l":"update(int, int)","u":"update(int,int)"}];updateSearchResults();
